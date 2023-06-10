@@ -3,7 +3,7 @@
 ## Introduction
 ---
 
-The Cacao Fermentation Dashboard is a web-based application designed to monitor and analyze the fermentation process of cacao beans. This dashboard provides real-time insights and visualizations to help cacao producers optimize their fermentation processes and ensure high-quality chocolate production. additionally real-time classification of fermentation degress is incorporated using TensorFlow. 
+The Cacao Fermentation Dashboard is a web-based application designed to monitor and analyze the fermentation process of cacao beans. This dashboard provides real-time insights and visualizations to help cacao producers optimize their fermentation processes and ensure high-quality chocolate production. Additionally real-time classification of fermentation degree is incorporated using TensorFlow. 
 
 ## Features
 The Cacao Fermentation Dashboard offers the following features:
