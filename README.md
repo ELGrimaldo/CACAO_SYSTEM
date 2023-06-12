@@ -71,8 +71,8 @@ The Cacao Fermentation Dashboard was developed by the following contributors:
 The Cacao Fermentation Dashboard is currently under development with the following unfinished features:
 
 - Front-End:
-    - [ ] Dashboard Interface
-    - [ ] Dashboard graph data using Chart.js
+    - [ ] Dashboard Interface `ongoing`
+    - [ ] Dashboard graph data using Chart.js `ongoing`
     - [ ] Boxes Interace
     - [ ] Boxes graph data using Chart.js
     - [ ] Connection Interface
@@ -80,5 +80,5 @@ The Cacao Fermentation Dashboard is currently under development with the followi
 - Back-end and Data connection
     - [ ] Create a server for recieving data from ESP32
     - [ ] Create class that will handle recieved data
-    - [ ] Create class that will manage the data including request from the interface.
+    - [ ] Create class that will manage the data including request from the interface. `ongoing`
     - [ ] Create class that will handle server client connection.
