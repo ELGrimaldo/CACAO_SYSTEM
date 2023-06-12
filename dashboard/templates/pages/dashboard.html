@@ -8,16 +8,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{% static '/css/dashboard.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Dashboard</title>
 </head>
 <body>
     <h1>Dashboard</h1>
-
+    <p>hello</p>
+    {% for key, value in boxes.items %}
+        <h3>{{key}}</h3>
+        <table>
+            <tr>
+            {% for feature in value %}
+                <th><p>{{feature}}</p></th>
+            {% endfor %}
+            </tr>
+            
+            
+        </table>
+        
+    {% endfor %}
     <div class="per-box">
         <div class="graph-data">
             <div class="graph-js">
-
+                <canvas id="sensor_data"></canvas>
             </div>
+            
             <div class="classification">
                 <h3>Classification</h3>
                 <hr>
@@ -120,14 +135,8 @@
             </table>
         </div>
     </div>
-    <div class="per-box">
-        <div class="graph-data">
-
-        </div>
-        <div class="sensor-data">
-        </div>
-    </div>
 </body>
 </html>
+<script src="{% static '/js/dashboard_chart.js' %}"></script>
 
 {% endblock content %}

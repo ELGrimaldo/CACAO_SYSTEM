@@ -44,6 +44,22 @@ The Cacao Fermentation Dashboard is built using the following technologies:
 - Framework
     - Django
 
+- AI
+    - TensorFlow
+
+- Hardwares
+    - ESP32
+    - MQ Senors
+        - MQ-2
+        - MQ-3
+        - MQ-7
+        - MQ-9
+        - MQ-135
+    - pH Level Sensor
+    - Temperature Sensor
+    - SD Card
+    - SD Card Module
+
 ## Contributors
 The Cacao Fermentation Dashboard was developed by the following contributors:
 
@@ -53,6 +69,7 @@ The Cacao Fermentation Dashboard was developed by the following contributors:
 
 ## Project Tasks
 The Cacao Fermentation Dashboard is currently under development with the following unfinished features:
+
 - Front-End:
     - [ ] Dashboard Interface
     - [ ] Dashboard graph data using Chart.js
