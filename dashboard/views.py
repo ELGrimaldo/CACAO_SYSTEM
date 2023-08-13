@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
 from .manageData import list_files, CacaoData
 
@@ -40,3 +41,41 @@ def connection(request):
 
 def base(request):
     return render(request, 'pages/base.html')
+
+@csrf_exempt
+def receive_data(request):
+    """ Handles incoming sensor data from an ESP32. """
+
+    if request.method == 'POST':
+        box_no = request.POST.get('box_no')
+        mq2_value = request.POST.get('mq2_value')
+        mq3_value = request.POST.get('mq3_value')
+        mq7_value = request.POST.get('mq7_value')
+        mq9_value = request.POST.get('mq9_value')
+        mq135_value = request.POST.get('mq135_value')
+        ph_value = request.POST.get('ph_value')
+        temp_value = request.POST.get('temp_value')
+
+        # TODO: Save data to database
+        # For now, just print the received data
+        print("Data received successfully. " +
+                            "Box no.: " + box_no + "\n" + 
+                            "MQ2: " + mq2_value + " " +
+                            "MQ3: " + mq3_value + " " +
+                            "MQ7: " + mq7_value + " " +
+                            "MQ9: " + mq9_value + " " +
+                            "MQ135: " + mq135_value + " " +
+                            "pH: " + ph_value + " " + 
+                            "Temperature: " + temp_value)
+        
+        return HttpResponse("Data received successfully. " +
+                            "Box no.: " + box_no + " " + 
+                            "MQ2: " + mq2_value + " " +
+                            "MQ3: " + mq3_value + " " +
+                            "MQ7: " + mq7_value + " " +
+                            "MQ9: " + mq9_value + " " +
+                            "MQ135: " + mq135_value + " " +
+                            "pH: " + ph_value + " " + 
+                            "Temperature: " + temp_value)
+    else:
+        return HttpResponse("Invalid request method")
