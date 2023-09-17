@@ -56,8 +56,18 @@ def receive_data(request):
         ph_value = request.POST.get('ph_value')
         temp_value = request.POST.get('temp_value')
 
-        # TODO: Save data to database
-        # For now, just print the received data
+        SensorData.objects.create(
+            box_no=box_no,
+            mq2_value=mq2_value,
+            mq3_value=mq3_value,
+            mq7_value=mq7_value,
+            mq9_value=mq9_value,
+            mq135_value=mq135_value,
+            ph_value=ph_value,
+            temp_value=temp_value,
+            timestamp=datetime.datetime.now()
+        )
+        
         print("Data received successfully. " +
                             "Box no.: " + box_no + "\n" + 
                             "MQ2: " + mq2_value + " " +
