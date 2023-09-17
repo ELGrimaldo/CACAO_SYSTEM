@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/dashboard.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Dashboard</h1>
+    <p>hello</p>
+    {% for key, value in boxes.items %}
+        <h3>{{key}}</h3>
+        <table>
+            <tr>
+            {% for feature in value %}
+                <th><p>{{feature}}</p></th>
+            {% endfor %}
+            </tr>
+            
+            
+        </table>
+        
+    {% endfor %}
+    <div class="per-box">
+        <div class="graph-data">
+            <div class="graph-js">
+                <canvas id="sensor_data"></canvas>
+            </div>
+            
+            <div class="classification">
+                <h3>Classification</h3>
+                <hr>
+                <p class="fd">Fermentation Degree: <span class="fd-result">Fermented</span></p>
+                
+                <div class="lower-section-classif">
+                    <div class="temp">
+                        <h5>Temperature</h5>
+                        <hr>
+                        <h2>45°C</h2>
+                    </div>
+                    <div class="phlev">
+                        <h5>pH Level</h5>
+                        <hr>
+                        <h2>7</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sensor-data">
+            <h3>Sensor Tabular Data</h3>
+            <table>
+                <tr>
+                    <th>MQ-2</th>
+                    <th>MQ-3</th>
+                    <th>MQ-7</th>
+                    <th>MQ-9</th>
+                    <th>MQ-135</th>
+                </tr>
+                <tr>
+                    <td>100</td>
+                    <td>80</td>
+                    <td>135</td>
+                    <td>295</td>
+                    <td>60</td>
+                </tr>
+                <tr>
+                    <td>100</td>
+                    <td>80</td>
+                    <td>135</td>
+                    <td>295</td>
+                    <td>60</td>
+                </tr>
+                <tr>
+                    <td>100</td>
+                    <td>80</td>
+                    <td>135</td>
+                    <td>295</td>
+                    <td>60</td>
+                </tr>
+                <tr>
+                    <td>100</td>
+                    <td>80</td>
+                    <td>135</td>
+                    <td>295</td>
+                    <td>60</td>
+                </tr>
+                <tr>
+                    <td>100</td>
+                    <td>80</td>
+                    <td>135</td>
+                    <td>295</td>
+                    <td>60</td>
+                </tr>
+                <tr>
+                    <td>100</td>
+                    <td>80</td>
+                    <td>135</td>
+                    <td>295</td>
+                    <td>60</td>
+                </tr>
+                <tr>
+                    <td>100</td>
+                    <td>80</td>
+                    <td>135</td>
+                    <td>295</td>
+                    <td>60</td>
+                </tr>
+                <tr>
+                    <td>100</td>
+                    <td>80</td>
+                    <td>135</td>
+                    <td>295</td>
+                    <td>60</td>
+                </tr>
+                <tr>
+                    <td>100</td>
+                    <td>80</td>
+                    <td>135</td>
+                    <td>295</td>
+                    <td>60</td>
+                </tr>
+                <tr>
+                    <td>100</td>
+                    <td>80</td>
+                    <td>135</td>
+                    <td>295</td>
+                    <td>60</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+<script src="{% static '/js/dashboard_chart.js' %}"></script>
+
+{% endblock content %}
