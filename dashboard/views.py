@@ -31,16 +31,16 @@ def index(request):
             }
         
         counter +=1
-    return render(request, 'pages/dashboard.html', context)
+    return render(request, 'dashboard.html', context)
 
 def boxes(request):
-    return render(request, 'pages/boxes.html')
+    return render(request, 'boxes.html')
 
 def connection(request):
-    return render(request, 'pages/connection.html')
+    return render(request, 'connection.html')
 
 def base(request):
-    return render(request, 'pages/base.html')
+    return render(request, 'base.html')
 
 @csrf_exempt
 def receive_data(request):
