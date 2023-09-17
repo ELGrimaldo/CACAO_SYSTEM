@@ -7,5 +7,6 @@ urlpatterns = [
     path("boxes", views.boxes, name="boxes"),
     path("connection", views.connection, name="connection"),
     path("base", views.base, name="base"),
-    path("receive_data/", views.receive_data, name="receive_data")
+    path("receive_data/", views.receive_data, name="receive_data"),
+    path('streamlit/', views.streamlit_view, name='streamlit'),
 ]

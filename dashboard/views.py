@@ -5,7 +5,8 @@ from .models import SensorData
 from datetime import datetime
 
 # Create your views here.
-
+def streamlit_view(request):
+    return render(request, 'streamlit.html')
 
 def index(request):
     return render(request, 'dashboard.html')
