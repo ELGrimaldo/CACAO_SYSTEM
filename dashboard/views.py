@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from .models import SensorData
+from datetime import datetime
 
 from .manageData import list_files, CacaoData
 
@@ -65,7 +67,7 @@ def receive_data(request):
             mq135_value=mq135_value,
             ph_value=ph_value,
             temp_value=temp_value,
-            timestamp=datetime.datetime.now()
+            timestamp=datetime.now()
         )
         
         print("Data received successfully. " +
