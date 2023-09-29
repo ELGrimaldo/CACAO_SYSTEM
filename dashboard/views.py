@@ -75,3 +75,67 @@ def receive_data(request):
                             "MQ135: " + mq135)
     else:
         return HttpResponse("[FROM SERVER] Invalid request method")
+
+def get_box_one_data(request, start, end):
+    response = {}
+    data = BoxOne.objects.filter(reading_id__gte=start, reading_id__lte=end).order_by('timestamp')
+    if data.count() < 10:
+        print(f"[Box 1] {data.count()}")
+        response['status'] = 'INCOMPLETE'
+    else:
+        response.update(data.aggregate(
+            mq2_ave = Avg('mq2'),
+            mq3_ave = Avg('mq3'),
+            mq7_ave = Avg('mq7'),
+            mq9_ave = Avg('mq9'),
+            mq135_ave = Avg('mq135')))
+        response['status'] = 'COMPLETE'
+    return JsonResponse(response)
+
+def get_box_two_data(request, start, end):
+    response = {}
+    data = BoxTwo.objects.filter(reading_id__gte=start, reading_id__lte=end).order_by('timestamp')
+    if data.count() < 10:
+        print(f"[Box 2] {data.count()}")
+        response['status'] = 'INCOMPLETE'
+    else:
+        response.update(data.aggregate(
+            mq2_ave = Avg('mq2'),
+            mq3_ave = Avg('mq3'),
+            mq7_ave = Avg('mq7'),
+            mq9_ave = Avg('mq9'),
+            mq135_ave = Avg('mq135')))
+        response['status'] = 'COMPLETE'
+    return JsonResponse(response)
+
+def get_box_three_data(request, start, end):
+    response = {}
+    data = BoxThree.objects.filter(reading_id__gte=start, reading_id__lte=end).order_by('timestamp')
+    if data.count() < 10:
+        print(f"[Box 3] {data.count()}")
+        response['status'] = 'INCOMPLETE'
+    else:
+        response.update(data.aggregate(
+            mq2_ave = Avg('mq2'),
+            mq3_ave = Avg('mq3'),
+            mq7_ave = Avg('mq7'),
+            mq9_ave = Avg('mq9'),
+            mq135_ave = Avg('mq135')))
+        response['status'] = 'COMPLETE'
+    return JsonResponse(response)
+
+def get_box_four_data(request, start, end):
+    response = {}
+    data = BoxFour.objects.filter(reading_id__gte=start, reading_id__lte=end).order_by('timestamp')
+    if data.count() < 10:
+        print(f"[Box 4] {data.count()}")
+        response['status'] = 'INCOMPLETE'
+    else:
+        response.update(data.aggregate(
+            mq2_ave = Avg('mq2'),
+            mq3_ave = Avg('mq3'),
+            mq7_ave = Avg('mq7'),
+            mq9_ave = Avg('mq9'),
+            mq135_ave = Avg('mq135')))
+        response['status'] = 'COMPLETE'
+    return JsonResponse(response)
