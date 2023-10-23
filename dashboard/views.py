@@ -9,13 +9,13 @@ def streamlit_view(request):
     return render(request, 'streamlit.html')
 
 def index(request):
-    return render(request, 'dashboard.html')
+    return render(request, 'chart.html')
 
 def boxes(request):
-    return render(request, 'boxes.html')
+    return render(request, 'data.html')
 
 def connection(request):
-    return render(request, 'connection.html')
+    return render(request, 'cuttest.html')
 
 def base(request):
     return render(request, 'base.html')

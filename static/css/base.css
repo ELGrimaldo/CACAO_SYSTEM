@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+
+html{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+body{
+    background-color: #0E1117;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+  text-decoration: none; /* Remove the underline */
+  color: inherit; /* Inherit the color from the parent element */
+}
+p{
+  font-family: 'Montserrat', sans-serif;
+    font-size: bold;
+}
+.navigation-bar{
+    border: 1px solid transparent;
+    width: 100%;
+    height: 10%;
+    padding-bottom: 80px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.logo-board{
+    border: 1px solid transparent;
+    height: 100%;
+    width: 30%;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.logo{
+    aspect-ratio: 1/1;
+    height: 100%;
+    border-radius: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1%;
+    border: 1px solid white;
+    background-color: white;
+    float: left;
+}
+.logo-name{
+    float: left;
+    text-align: left;
+    color: white;
+    font-size: large;
+    margin-left: 5px;
+}
+
+.logo-img{
+    
+    width: 65%;
+    height: 80%;
+    margin-top: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    background-size: cover;
+}
+
+.nav-buttons{
+    border: 1px solid transparent;
+    width: 70%;
+    height: 70%;
+    margin: 0 auto;
+    padding-top: 5px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.content-view{
+    border: 1px solid #2D5A3D;
+    border-radius: 12px;
+    height: 100%;
+    width: 70%;
+    margin: 0 auto;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.Chart{
+  display: inline-block;
+  border: 1px solid #2D5A3D;
+  background-color: #2D5A3D;
+  border-radius: 8px;
+  padding: 0 20px;
+  margin: 0 5px;
+}
+.chart-p{
+  color: white;
+  font-size: 12px;
+}
+.Data{
+  display: inline-block;
+  border: 1px solid #2D5A3D;
+  border-radius: 8px;
+  padding: 0 20px;
+  margin: 0 5px;
+  
+}
+.data-p{
+  color: white;
+  font-size: 12px;
+}
+
+.cut-test{
+  display: inline-block;
+  border: 1px solid #2D5A3D;
+  border-radius: 8px;
+  padding: 0 20px;
+  margin: 0 5px;
+}
+.cut-p{
+  color: white;
+  font-size: 12px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #68A77C; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #2D5A3D; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #2D5A3D; 
+}
+
+.foot{
+  width: 100%;
+  height: 10%;
+  border: 1px solid transparent;
+}
+
+h5{
+  color: white;
+  text-align: center;
+}

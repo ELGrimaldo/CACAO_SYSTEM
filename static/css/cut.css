@@ -1,0 +1,11 @@
+.upload-here{
+    text-align: center;
+    color: white;
+}
+
+.dropzone{
+    background-color: #0E1117;
+    border: 1px dashed #2D5A3D;
+    border-radius: 12px;
+    height: 400px;
+}

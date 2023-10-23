@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{% static '/css/cut.css' %}">
+
+    <title>Cut test classifier</title>
+</head>
+<body>
+    <div class="upload-here">
+        <p class="p1">Upload your images</p>
+        <p class="p2">PNG and JPG files are allowed</p>
+
+        <div class="form-upload">
+            <form action="/connection" method="POST" class="dropzone" id="my-awesome-dropzone">
+            {% csrf_token %}
+        </form>
+        </div>
+        <div class="convert-btn"> <a href="/connection">Convert to Text</a> </div>
+
+    </div>
+    <script src="{% static '/js/class.js' %}"></script>
+</body>
+</html>
+{% endblock content %}

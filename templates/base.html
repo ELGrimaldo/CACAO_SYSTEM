@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cacao Fermentation Dashboard</title>
-    <link rel="stylesheet" type="text/css" href="{% static '/css/bases.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/base.css' %}">
     <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}">
 
 </head>
@@ -14,56 +14,49 @@
     
     <div class="navigation-bar">
         
-        <div class="bubble-nav">
-            
-        </div>
-        <div class="logo" >
+        <div class="logo-board">
+            <div class="logo" >
 
-            <div class="logo-img"style="background-image: url({% static 'images/logo.png' %});">
-
-            </div>
-        </div>
-
-        <div class="nav-icons">
-            <div class="bubble-img"style="background-image: url({% static 'images/navigation-bubble.png' %});">
-
-            </div>
-            <a href="/">
-                <div class="dashboard">
-                    <div class="icon-img"style="background-image: url({% static 'images/dashboard.png' %});">
+                <div class="logo-img"style="background-image: url({% static 'images/logo.png' %});">
     
-                    </div>
                 </div>
+                
+            </div>
+            <p class="logo-name">
+                Cacao Fermentation <br> Monitoring System 
+            </p>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="/">
+                <div class="Chart" id="chart">
+                    <p class="chart-p">Chart</p>
+                </div>
+                
             </a>
             <a href="/boxes">
-                <div class="boxes" >
-                    <div class="icon-img"style="background-image: url({% static 'images/pallets.png' %});">
-    
-                    </div>
+                <div class="Data" id="data">
+                    <p class="data-p">Data</p>
                 </div>
             </a>
-            
             <a href="/connection">
-                <div class="connection">
-                    <div class="icon-img"style="background-image: url({% static 'images/connections.png' %});">
-    
-                    </div>
+                <div class="cut-test" id="cuttest">
+                    <p class="cut-p">Cut Test Classifier</p>
                 </div>
             </a>
-            
-
-            <div class="refresh">
-                <div class="refresh-img"style="background-image: url({% static 'images/refresh.png' %});">
-
-                </div>
-            </div>
-
         </div>
+        
     </div>
+
     <div class="content-view">
         {% block content %}
     
         {% endblock content %}
     </div>
+    <div class="foot">
+        <p>James Leo Grimaldo | Meliza Parcon | Rikiya Yamamoto</p>
+        <h5> © 2023 Oompa Loompas. All Rights Reserved.</h5>
+    </div>
+    <script src="{% static '/js/nav.js' %}"></script>
 </body>
 </html>

@@ -1,12 +1,19 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
 
-
+body{
+    
+    align-content: center;
+}
 h1{
     color: #2D5A3D;
     font-family: 'Montserrat', sans-serif;
     font-size: bold;
     margin-left: 5%;
+}
+
+.graph-frame{
+    border: 1px solid transparent;
 }
 
 .per-box{
@@ -85,27 +92,7 @@ p{
     margin-top: 40px;
 }
 
-.temp{
-    border: 1px solid transparent;
-    aspect-ratio: 1/1.1;
-    width: 40%;
-    float: left;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    margin-left: 6%;
-    margin-top: 50px;
-}
 
-.phlev{
-    border: 1px solid transparent;
-    aspect-ratio: 1/1.1;
-    width: 40%;
-    float: left;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    margin-left: 6%;
-    margin-top: 50px;
-}
 
 h5{
     font-family: 'Montserrat', sans-serif;
