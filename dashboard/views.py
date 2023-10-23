@@ -26,44 +26,116 @@ def receive_data(request):
 
     if request.method == 'POST':
         box_no = request.POST.get('box_no')
-        mq2_value = request.POST.get('mq2_value')
-        mq3_value = request.POST.get('mq3_value')
-        mq7_value = request.POST.get('mq7_value')
-        mq9_value = request.POST.get('mq9_value')
-        mq135_value = request.POST.get('mq135_value')
-        ph_value = request.POST.get('ph_value')
-        temp_value = request.POST.get('temp_value')
+        mq2 = request.POST.get('mq2')
+        mq3 = request.POST.get('mq3')
+        mq7 = request.POST.get('mq7')
+        mq9 = request.POST.get('mq9')
+        mq135 = request.POST.get('mq135')
 
-        SensorData.objects.create(
-            box_no=box_no,
-            mq2_value=mq2_value,
-            mq3_value=mq3_value,
-            mq7_value=mq7_value,
-            mq9_value=mq9_value,
-            mq135_value=mq135_value,
-            ph_value=ph_value,
-            temp_value=temp_value,
-            timestamp=datetime.now()
-        )
+        if box_no == '1':
+            BoxOne.objects.create(mq2 = mq2,
+                                  mq3 = mq3,
+                                  mq7 = mq7,
+                                  mq9 = mq9,
+                                  mq135 = mq135)
+            
+        elif box_no == '2':
+            BoxTwo.objects.create(mq2 = mq2,
+                                  mq3 = mq3,
+                                  mq7 = mq7,
+                                  mq9 = mq9,
+                                  mq135 = mq135)
+            
+        elif box_no == '3':
+            BoxThree.objects.create(mq2 = mq2,
+                                    mq3 = mq3,
+                                    mq7 = mq7,
+                                    mq9 = mq9,
+                                    mq135 = mq135)
+            
+        elif box_no == '4':
+            BoxFour.objects.create(mq2 = mq2,
+                                   mq3 = mq3,
+                                   mq7 = mq7,
+                                   mq9 = mq9,
+                                   mq135 = mq135)
         
-        print("Data received successfully. " +
-                            "Box no.: " + box_no + "\n" + 
-                            "MQ2: " + mq2_value + " " +
-                            "MQ3: " + mq3_value + " " +
-                            "MQ7: " + mq7_value + " " +
-                            "MQ9: " + mq9_value + " " +
-                            "MQ135: " + mq135_value + " " +
-                            "pH: " + ph_value + " " + 
-                            "Temperature: " + temp_value)
+        print("[SERVER LOG] Data received successfully from box no. " + box_no + ": \n" + 
+                            "MQ2: " + mq2 + ", " +
+                            "MQ3: " + mq3 + ", " +
+                            "MQ7: " + mq7 + ", " +
+                            "MQ9: " + mq9 + ", " +
+                            "MQ135: " + mq135)
         
-        return HttpResponse("Data received successfully. " +
-                            "Box no.: " + box_no + " " + 
-                            "MQ2: " + mq2_value + " " +
-                            "MQ3: " + mq3_value + " " +
-                            "MQ7: " + mq7_value + " " +
-                            "MQ9: " + mq9_value + " " +
-                            "MQ135: " + mq135_value + " " +
-                            "pH: " + ph_value + " " + 
-                            "Temperature: " + temp_value)
+        return HttpResponse("[FROM SERVER] Your sent data from box no. " + box_no + ": \n" + 
+                            "MQ2: " + mq2 + ", " +
+                            "MQ3: " + mq3 + ", " +
+                            "MQ7: " + mq7 + ", " +
+                            "MQ9: " + mq9 + ", " +
+                            "MQ135: " + mq135)
     else:
-        return HttpResponse("Invalid request method")
+        return HttpResponse("[FROM SERVER] Invalid request method")
+
+def get_box_one_data(request, start, end):
+    response = {}
+    data = BoxOne.objects.filter(reading_id__gte=start, reading_id__lte=end).order_by('timestamp')
+    if data.count() < 10:
+        print(f"[Box 1] {data.count()}")
+        response['status'] = 'INCOMPLETE'
+    else:
+        response.update(data.aggregate(
+            mq2_ave = Avg('mq2'),
+            mq3_ave = Avg('mq3'),
+            mq7_ave = Avg('mq7'),
+            mq9_ave = Avg('mq9'),
+            mq135_ave = Avg('mq135')))
+        response['status'] = 'COMPLETE'
+    return JsonResponse(response)
+
+def get_box_two_data(request, start, end):
+    response = {}
+    data = BoxTwo.objects.filter(reading_id__gte=start, reading_id__lte=end).order_by('timestamp')
+    if data.count() < 10:
+        print(f"[Box 2] {data.count()}")
+        response['status'] = 'INCOMPLETE'
+    else:
+        response.update(data.aggregate(
+            mq2_ave = Avg('mq2'),
+            mq3_ave = Avg('mq3'),
+            mq7_ave = Avg('mq7'),
+            mq9_ave = Avg('mq9'),
+            mq135_ave = Avg('mq135')))
+        response['status'] = 'COMPLETE'
+    return JsonResponse(response)
+
+def get_box_three_data(request, start, end):
+    response = {}
+    data = BoxThree.objects.filter(reading_id__gte=start, reading_id__lte=end).order_by('timestamp')
+    if data.count() < 10:
+        print(f"[Box 3] {data.count()}")
+        response['status'] = 'INCOMPLETE'
+    else:
+        response.update(data.aggregate(
+            mq2_ave = Avg('mq2'),
+            mq3_ave = Avg('mq3'),
+            mq7_ave = Avg('mq7'),
+            mq9_ave = Avg('mq9'),
+            mq135_ave = Avg('mq135')))
+        response['status'] = 'COMPLETE'
+    return JsonResponse(response)
+
+def get_box_four_data(request, start, end):
+    response = {}
+    data = BoxFour.objects.filter(reading_id__gte=start, reading_id__lte=end).order_by('timestamp')
+    if data.count() < 10:
+        print(f"[Box 4] {data.count()}")
+        response['status'] = 'INCOMPLETE'
+    else:
+        response.update(data.aggregate(
+            mq2_ave = Avg('mq2'),
+            mq3_ave = Avg('mq3'),
+            mq7_ave = Avg('mq7'),
+            mq9_ave = Avg('mq9'),
+            mq135_ave = Avg('mq135')))
+        response['status'] = 'COMPLETE'
+    return JsonResponse(response)
