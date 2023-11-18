@@ -1,8 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from .models import SensorData
-from datetime import datetime
+from django.http import JsonResponse
+from .models import *
+from .prediction import predict
+
+import pandas as pd
 
 # Create your views here.
 def streamlit_view(request):
