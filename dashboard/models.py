@@ -12,3 +12,10 @@ class SensorData(models.Model):
 
     def __str__(self):
         return str(self.reading_id)
+
+
+class CacaoImages(models.Model):
+    upload = models.ImageField(upload_to='static/media/images')
+    
+    def __str__(self) -> str:
+        return str(self.pk)

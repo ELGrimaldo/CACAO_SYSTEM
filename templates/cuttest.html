@@ -9,24 +9,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="{% static '/css/cut.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/cuttest.css' %}">
 
     <title>Cut test classifier</title>
 </head>
 <body>
     <div class="upload-here">
         <p class="p1">Upload your images</p>
-        <p class="p2">PNG and JPG files are allowed</p>
+        <p class="p2">Only PNG & JPG file format are allowed</p>
 
         <div class="form-upload">
-            <form action="/connection" method="POST" class="dropzone" id="my-awesome-dropzone">
+            <form action="upload/" method="POST"
+         class="dropzone"
+        id="my-awesome-dropzone">
             {% csrf_token %}
         </form>
         </div>
-        <div class="convert-btn"> <a href="/connection">Convert to Text</a> </div>
-
+        <a href="">
+            <div class="convert-btn"> Classify </div>
+        </a>
+        
+        
     </div>
-    <script src="{% static '/js/class.js' %}"></script>
+    {% for filename, label in classification_data.items %}
+            <div class="result">
+        
+                <div class="image-holder" style="background-image: url({% static 'media/images/' %}{{filename}});">
+    
+                </div>
+                <div class="file-name">
+                    <h3>File name: </h3>
+                    <h2>{{ filename }}</h2>
+                </div>
+                <div class="classification-result">
+                    <h3>Classification Result: </h3>
+                    <h2>{{ label.Classification_Result }}</h2>
+                </div>
+                <div class="classification-percentage">
+                    <table>
+                        <tr>
+                          <th>Unfermented</th>
+                          <th>Under Femented</th>
+                          <th>Partially Fermented</th>
+                          <th>Fermented</th>
+                        </tr>
+                        <tr>
+                          <td>{{ label.Unfermented }}</td>
+                          <td>{{ label.Under_Fermented }}</td>
+                          <td>{{ label.Partially_Fermented }}</td>
+                          <td>{{ label.Fermented }}</td>
+                        </tr>
+                      </table>
+                </div>
+        </div>
+    {% endfor %}
+    
+    
+    <script src="{% static '/js/dragndrop.js' %}"></script>
 </body>
 </html>
 {% endblock content %}

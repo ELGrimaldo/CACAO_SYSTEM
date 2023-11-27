@@ -3,7 +3,11 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from .models import *
+from django.views.generic import TemplateView
 from .prediction import predict
+from django.db.models import Avg
+from . models import CacaoImages
+from . cacao_image_lib import CacaoImageFunctions
 
 import pandas as pd
 
@@ -17,8 +21,15 @@ def index(request):
 def boxes(request):
     return render(request, 'data.html')
 
-def connection(request):
-    return render(request, 'cuttest.html')
+def cuttest(request):
+    classification_data = CacaoImageFunctions.predictImages()
+    print(classification_data)
+    print("indicator")
+    print(CacaoImageFunctions.getImages())
+    
+    
+    
+    return render(request, 'cuttest.html', {'classification_data': classification_data})
 
 def base(request):
     return render(request, 'base.html')
@@ -91,7 +102,7 @@ def get_box_data(request, start, end):
         })
 
         # Pass in the data frame to the prediction function
-        prediction = predict(data)
+        prediction = "predict(data)"
 
         # Store the result in JSON
         response['prediction'] = int(prediction[0][0])
@@ -104,3 +115,18 @@ def get_box_data(request, start, end):
         print(f"[SERVER LOG] Data count: {data.count()}")
     
     return JsonResponse(response)
+
+
+def file_upload_view(request):
+    if request.method == 'POST':
+        
+        
+        # print(request.FILES)
+        
+        my_file = request.FILES.get('file')
+        
+        CacaoImages.objects.create(upload=my_file)
+        
+        return HttpResponse('')
+    
+    return JsonResponse({'post': 'false'})
