@@ -11,6 +11,12 @@ from . cacao_image_lib import CacaoImageFunctions
 
 import pandas as pd
 
+SOURCE = 'BOX'
+SKIP_DAYS = True
+
+if SOURCE == 'BOX':
+    box_4 = pd.read_csv('./dashboard/data/box_4_data.csv')
+
 # Create your views here.
 def streamlit_view(request):
     return render(request, 'streamlit.html')
@@ -69,50 +75,82 @@ def get_box_data(request, start, end):
 
     # To store the JSON response
     response = {
-        'status': 'INCOMPLETE' # Initially, there is no data and prediction result, so the status should be incomplete yet.
+        'status': 'INCOMPLETE', # Initially, there is no data and prediction result, so the status should be incomplete yet.
+        'prediction': 0,
+        'skip_days': False
     }
 
-    # Should read 3000 contiguous rows of data
-    # Start and end query indices comes from the argument passed in the URL request parameter by streamlit
-    data = SensorData.objects.filter(reading_id__gte=start, reading_id__lte=end).order_by('timestamp')
+    global SKIP_DAYS
+    if SKIP_DAYS:
+        print('Skipped days.')
+        response.update(box_4.iloc[169000:169010].to_dict(orient='list'))
+        response['status'] = 'COMPLETE'
+        response['skip_days'] = True
+        SKIP_DAYS = False
 
-    # If the row count is 3000, calculate the average of each column.
-    # Then, use the average values to predict the fermentation degree of cacao beans
-    # and store them in a JSON and return it as response.
-    if data.count() == 3000:
-
-        # Calculate the average of each column (mq2 to mq135)
-        avgs = data.aggregate(
-                mq2_ave = Avg('mq2'),
-                mq3_ave = Avg('mq3'),
-                mq7_ave = Avg('mq7'),
-                mq9_ave = Avg('mq9'),
-                mq135_ave = Avg('mq135'))
+    # For using box_4 as the data
+    elif SOURCE == 'BOX':
+        print('Here at source: box.')
         
-        # Store it in JSON
-        response.update(avgs)
-        
-        # Use the averages in a data frame (so that it can be used for prediction)
-        data = pd.DataFrame({
-            'mq2': [response['mq2_ave']],
-            'mq3': [response['mq3_ave']],
-            'mq7': [response['mq7_ave']],
-            'mq9': [response['mq9_ave']],
-            'mq135': [response['mq135_ave']],
-        })
+        # Read a row
+        data = box_4.iloc[start].to_dict()
 
-        # Pass in the data frame to the prediction function
-        prediction = "predict(data)"
+        # Append row data to response dict
+        response.update(data)
+
+        # Put data in data frame so that it can be used for prediction
+        data = pd.DataFrame(data, index=[0]) 
+
+        prediction = predict(data)
 
         # Store the result in JSON
         response['prediction'] = int(prediction[0][0])
 
         # Change the status to complete now that there is data and prediction result
         response['status'] = 'COMPLETE'
+        
+    else:    
+        # Should read 3000 contiguous rows of data
+        # Start and end query indices comes from the argument passed in the URL request parameter by streamlit
+        data = SensorData.objects.filter(reading_id__gte=start, reading_id__lte=end).order_by('timestamp')
     
-    # If the row count is not exactly 3000 rows, just print the row count.
-    else:
-        print(f"[SERVER LOG] Data count: {data.count()}")
+        # If the row count is 3000, calculate the average of each column.
+        # Then, use the average values to predict the fermentation degree of cacao beans
+        # and store them in a JSON and return it as response.
+        if data.count() == 3000:
+    
+            # Calculate the average of each column (mq2 to mq135)
+            avgs = data.aggregate(
+                    mq2_ave = Avg('mq2'),
+                    mq3_ave = Avg('mq3'),
+                    mq7_ave = Avg('mq7'),
+                    mq9_ave = Avg('mq9'),
+                    mq135_ave = Avg('mq135'))
+            
+            # Store it in JSON
+            response.update(avgs)
+            
+            # Use the averages in a data frame (so that it can be used for prediction)
+            data = pd.DataFrame({
+                'mq2': [response['mq2_ave']],
+                'mq3': [response['mq3_ave']],
+                'mq7': [response['mq7_ave']],
+                'mq9': [response['mq9_ave']],
+                'mq135': [response['mq135_ave']],
+            })
+    
+            # Pass in the data frame to the prediction function
+            prediction = "predict(data)"
+    
+            # Store the result in JSON
+            response['prediction'] = int(prediction[0][0])
+    
+            # Change the status to complete now that there is data and prediction result
+            response['status'] = 'COMPLETE'
+        
+        # If the row count is not exactly 3000 rows, just print the row count.
+        else:
+            print(f"[SERVER LOG] Data count: {data.count()}")
     
     return JsonResponse(response)
 
