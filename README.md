@@ -68,18 +68,5 @@ The Cacao Fermentation Dashboard was developed by the following contributors:
 - [Rikiya Yamamoto](https://github.com/Boopya)
 
 ## Project Tasks
-The Cacao Fermentation Dashboard is currently under development with the following unfinished features:
-
-- Front-End:
-    - [ ] Dashboard Interface `ongoing` [James Grimaldo](https://github.com/ELGrimaldo)
-    - [ ] Dashboard graph data using Chart.js `ongoing` [James Grimaldo](https://github.com/ELGrimaldo)
-    - [ ] Boxes Interace
-    - [ ] Boxes graph data using Chart.js
-    - [ ] Visualize data from models.
-    - [ ] Connection Interface
-
-- Back-end and Data connection
-    - [ ] Models for data
-    - [ ] Create class that will handle recieved data
-    - [ ] Create class that will manage the data including request from the interface. `ongoing` [James Grimaldo](https://github.com/ELGrimaldo)
+Tapos na
  
